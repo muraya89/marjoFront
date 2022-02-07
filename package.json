@@ -31,5 +31,21 @@
     "vue-cli-plugin-vuetify": "~2.4.5",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
-  }
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muraya89/marjo.git"
+  },
+  "keywords": [
+    "motor",
+    "cabs"
+  ],
+  "author": "_raya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/muraya89/marjo/issues"
+  },
+  "homepage": "https://github.com/muraya89/marjo#readme"
 }
