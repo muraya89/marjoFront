@@ -90,7 +90,6 @@
       </v-container>
 
       <v-divider class="my-5" />
-      
     </v-main>
   </v-app>
 </template>
