@@ -9,5 +9,10 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    isIdle() {
+      return this.$store.state.idleVue.isIdle;
+    },
+  },
 };
 </script>
