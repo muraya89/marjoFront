@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import dashboard from "./packages/dashboard";
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 import idleVue from "idle-vue";
 
 Vue.config.productionTip = false;

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer">
+    <!-- <v-navigation-drawer v-model="drawer">
       <v-list nav>
         <v-list-item-group v-model="group">
           <v-list-item>
@@ -17,15 +17,18 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-app-bar color="primary">
-      <v-app-bar-nav-icon
-        color="white"
-        @click="drawer = !drawer"
-      ></v-app-bar-nav-icon>
-      <v-toolbar-title class="white--text">MARJO</v-toolbar-title>
+      <v-toolbar-title class="white--text">
+        <span id="heading">MARJO cabs services</span>
+      </v-toolbar-title>
+      <v-spacer />
+      <v-btn class="white--text" text>About</v-btn>
     </v-app-bar>
-    <v-divider />
+
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
 
@@ -38,5 +41,21 @@ export default {
       group: null,
     };
   },
+  computed: {
+    links() {
+      return this.$store.getters["Dashboard/links"]
+        .filter((item) => !item.disabled && item.title !== "Administration")
+        .map((link) => {
+          link.sublinks = link.sublinks || [];
+          return link;
+        });
+    },
+  },
 };
 </script>
+<style scoped>
+#heading {
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size: 35px;
+}
+</style>

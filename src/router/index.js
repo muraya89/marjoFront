@@ -4,10 +4,10 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/",
-  //   redirect: "/dashboard",
-  // },
+  {
+    path: "/",
+    redirect: "/dashboard",
+  },
 ];
 
 const router = new VueRouter({
