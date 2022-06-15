@@ -1,9 +1,9 @@
-import landing from "./views/landing";
+import Signup from "./components/Signup";
 
 export default [
   {
-    path: "/",
-    name: "Landing",
-    component: landing,
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
   },
 ];

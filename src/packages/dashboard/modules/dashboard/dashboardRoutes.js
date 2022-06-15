@@ -1,4 +1,5 @@
 import dashboardLayout from "./views/dashboardLayout";
+import landingPage from "./components/landingPage.vue";
 
 export default [
   {
@@ -7,7 +8,12 @@ export default [
     children: [
       {
         path: "",
-        redirect: "/dashboard/summaries",
+        redirect: "/dashboard/landing",
+      },
+      {
+        path: "landing",
+        name: "landingPage",
+        component: landingPage,
       },
     ],
   },
