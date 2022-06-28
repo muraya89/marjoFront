@@ -1,13 +1,13 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-card class="mx-auto my-10">
-        <v-card-text>
-          <v-row class="d-flex justify-space-around">
-            <v-col cols="12" md="6">
-              <div class="text-center">
-                <p class="ma-4 pa-4">MARJO CABS SERVICES ACCOUNT CREATION</p>
-              </div>
+  <v-card>
+    <v-row class="d-flex">
+      <v-col cols="12" md="6">
+        <SideLogo />
+      </v-col>
+      <v-col cols="12" md="6" class="my-auto">
+        <v-card flat>
+          <v-card-text class="d-flex flex-column justify-center">
+            <div class="mx-16 pa-md-15">
               <v-form class="mt-2" ref="SignupForm">
                 <v-row>
                   <v-col cols="12" md="12" sm="12">
@@ -159,23 +159,17 @@
                   </v-col>
                 </v-row>
               </v-form>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-img
-                max-width="90%"
-                max-height="80%"
-                contain
-                src="../../../../../assets/Mercedes.jpg"
-              />
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-container>
-  </v-app>
+            </div>
+          </v-card-text>
+        </v-card>
+        <v-divider />
+      </v-col>
+    </v-row>
+  </v-card>
 </template>
-
 <script>
+import SideLogo from "./SideLogo.vue";
+
 export default {
   name: "Signup",
   data() {
@@ -183,5 +177,35 @@ export default {
       showPassword: false,
     };
   },
+  components: { SideLogo },
+  computed: {
+    rules() {
+      return {
+        email: [
+          (v) => !!v || "E-mail is required",
+          (v) => /.+@.+/.test(v) || "E-mail must be valid",
+        ],
+        password: [(v) => !!v || "Password is required"],
+      };
+    },
+  },
 };
 </script>
+<style scoped>
+@media (max-width: 768px) {
+  #flex {
+    display: flex;
+    flex-direction: column;
+  }
+  #display1 {
+    order: 2;
+  }
+  #display2 {
+    order: 1;
+  }
+}
+.font {
+  color: rgba(240, 248, 255, 0.903);
+  font-size: 16px !important;
+}
+</style>
