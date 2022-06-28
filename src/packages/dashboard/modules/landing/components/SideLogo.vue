@@ -5,19 +5,11 @@
     class="mx-auto d-flex flex-column justify-center"
     elevation="0"
     color="primary"
+    tile
   >
     <div class="login-photo mx-auto">
       <v-img src="../assets/login.svg"></v-img>
-      <p class="font justify-center text-wrap mt-3">
-        <span>
-          Say goodbye to manual writting and submitting of examination questions
-          and hello to automatic uploads
-        </span>
-        <br />
-        <span>
-          Login to your account and start using the portal to create questions.
-        </span>
-      </p>
+      <p class="font justify-center text-wrap mt-3"></p>
     </div>
   </v-card>
 </template>

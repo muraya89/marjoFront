@@ -6,78 +6,46 @@
 
         <v-card-text class="pa-0">
           <div class="header">
-            <div class="header-content d-flex">
-              <v-btn text dark :to="{ name: 'landingPage' }">
-                <v-icon class="mr-1">mdi-arrow-left</v-icon>
-                <span>Back</span>
-              </v-btn>
+            <div class="header-content">
               <h1><span class="taxi">MARJO CABS SERVICES</span></h1>
             </div>
           </div>
-          <div class="text-center px-15">
+          <div class="text-center mx-15">
             <v-avatar color="secondary" class="mt-3">
               <span>MCS</span>
             </v-avatar>
-            <p class="ma-2 pa-1">LOGIN TO CONTINUE</p>
-            <v-form>
+            <p class="mt-1">No worries we'll send you reset instructions</p>
+            <form>
               <v-text-field
-                ref="email"
                 v-model="formData.email"
+                :rules="rules.email"
                 @copy.prevent
                 outlined
+                class="mt-3"
                 label="Email Address"
                 placeholder="Enter your Email Address"
                 prepend-inner-icon="email"
-                :rules="rules.email"
                 autocomplete="false"
                 @keyup.enter="login()"
               />
-
-              <v-text-field
-                ref="password"
-                v-model="formData.password"
-                outlined
-                @copy.prevent
-                label="Password"
-                placeholder="Enter your password"
-                prepend-inner-icon="vpn_key"
-                :type="showPassword ? 'text' : 'password'"
-                :rules="rules.password"
-                autocomplete="false"
-                @keyup.enter="login()"
-              >
-                <template v-slot:append>
-                  <v-btn @click="showPassword = !showPassword" icon>
-                    <v-icon>{{
-                      showPassword ? "visibility" : "visibility_off"
-                    }}</v-icon>
-                  </v-btn>
-                </template>
-              </v-text-field>
-              <div class="d-flex align-center justify-space-between flex-wrap">
-                <v-checkbox label="Remember Me" hide-details class="me-3 mt-1">
-                </v-checkbox>
-                <!-- forgot link -->
-                <router-link
-                  :to="{ name: 'ForgotPassword' }"
-                  class="mt-1 text-decoration-none"
-                  >Forgot Password?
-                </router-link>
-              </div>
-            </v-form>
-            <div class="d-flex justify-start mt-2">
-              <span class="mt-1 mr-1">Already a member?</span>
-              <router-link
-                :to="{ name: 'Signup' }"
-                class="mt-1 text-decoration-none"
-                >Create an account
-              </router-link>
-            </div>
+            </form>
           </div>
         </v-card-text>
-
+        <v-row class="justify-center">
+          <!-- <v-btn text color="primary" :to="{ name: 'Login' }">
+            <v-icon class="mr-2" small>mdi-arrow-left</v-icon>
+            <span>Back to login</span>
+          </v-btn> -->
+          <router-link
+            :to="{ name: 'Login' }"
+            class="mt-1 text-decoration-none"
+          >
+            <v-icon class="mr-1" color="primary">mdi-arrow-left</v-icon>
+            Back to login
+          </router-link>
+        </v-row>
         <v-card-actions class="button">
-          <v-btn color="primary" class="mx-auto" x-large>Login</v-btn>
+          <v-btn color="primary" class="mx-auto" x-large>Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-container>
@@ -86,13 +54,12 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "ForgotPassword",
   data() {
     return {
       showPassword: false,
       formData: {
         email: "",
-        password: "",
       },
     };
   },
@@ -140,7 +107,6 @@ header h1 {
   position: absolute;
   top: 40%;
   left: 10%;
-  transfrom: translate(-50%, -50%);
   color: #fff;
 }
 
