@@ -10,7 +10,7 @@
               class="primary white--text mr-15"
               x-large
               elevation="0"
-              :to="{ name: 'Signup' }"
+              :to="{ name: 'Login' }"
             >
               book a cab
             </v-btn>
