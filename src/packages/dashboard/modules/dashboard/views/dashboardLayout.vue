@@ -23,7 +23,11 @@
         <span id="heading">MARJO cabs services</span>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn class="white--text" text>About</v-btn>
+      <router-link
+        class="white--text text-capitalize text-decoration-none text-overline"
+        :to="{ name: 'Login' }"
+        >About</router-link
+      >
     </v-app-bar>
 
     <v-main>

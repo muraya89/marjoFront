@@ -1,13 +1,17 @@
 <template>
   <v-card>
-    <v-row class="d-flex">
-      <v-col cols="12" md="6">
+    <v-row class="fill-height">
+      <v-col cols="12" md="6" class="">
         <SideLogo />
       </v-col>
       <v-col cols="12" md="6" class="my-auto">
         <v-card flat>
           <v-card-text class="d-flex flex-column justify-center">
-            <div class="mx-16 pa-md-15">
+            <div class="mx-16 text-center">
+              <v-avatar color="secondary">
+                <span>MCS</span>
+              </v-avatar>
+              <p class="ma-4 pa-4">ACCOUNT CREATION</p>
               <v-form class="mt-2" ref="SignupForm">
                 <v-row>
                   <v-col cols="12" md="12" sm="12">
@@ -150,19 +154,15 @@
                       </template>
                     </v-text-field>
                   </v-col>
-                  <v-col cols="12">
-                    <div>
-                      <v-btn block class="primary sign-up-button"
-                        >Sign Up</v-btn
-                      >
-                    </div>
-                  </v-col>
                 </v-row>
               </v-form>
             </div>
           </v-card-text>
+          <v-divider />
+          <v-card-actions>
+            <v-btn class="primary mx-auto">Sign Up</v-btn>
+          </v-card-actions>
         </v-card>
-        <v-divider />
       </v-col>
     </v-row>
   </v-card>
