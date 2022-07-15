@@ -6,6 +6,7 @@ import vuetify from "./plugins/vuetify";
 import dashboard from "./packages/dashboard";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import idleVue from "idle-vue";
+import listener from "@/packages/dashboard/mixin/listeners/listener";
 
 Vue.config.productionTip = false;
 
@@ -13,6 +14,7 @@ const eventsHub = new Vue();
 const options = { router, store, eventEmitter: eventsHub, idleTime: 10000 };
 
 Vue.use(dashboard, options, idleVue);
+Vue.use(listener, options);
 
 new Vue({
   router,

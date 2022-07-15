@@ -12,14 +12,16 @@
                 <span>MCS</span>
               </v-avatar>
               <p class="ma-4 pa-4">ACCOUNT CREATION</p>
-              <v-form class="mt-2" ref="SignupForm">
+              <v-form class="mt-2" ref="SignupForm" v-model="isValid">
                 <v-row>
                   <v-col cols="12" md="12" sm="12">
                     <v-text-field
                       label="First Name"
-                      persistent-placeholder
                       placeholder="Enter your First Name"
                       prepend-inner-icon="account_circle"
+                      v-model="formData.firstName"
+                      :rules="rules.required"
+                      persistent-placeholder
                       clearable
                       outlined
                       dense
@@ -29,9 +31,11 @@
                   <v-col cols="12" md="12" sm="12" class="mt-n4">
                     <v-text-field
                       label="Last Name"
-                      persistent-placeholder
                       placeholder="Enter your Last Name"
                       prepend-inner-icon="account_circle"
+                      v-model="formData.lastName"
+                      :rules="rules.required"
+                      persistent-placeholder
                       clearable
                       outlined
                       dense
@@ -42,8 +46,10 @@
                     <v-text-field
                       label="Email"
                       placeholder="Email"
-                      persistent-placeholder
                       prepend-inner-icon="email"
+                      v-model="formData.email"
+                      :rules="rules.email"
+                      persistent-placeholder
                       clearable
                       outlined
                       dense
@@ -54,10 +60,12 @@
                     <v-text-field
                       label="ID/ Passport No."
                       placeholder="Enter National ID / Passport  No"
+                      prepend-inner-icon="assignment"
+                      v-model="formData.idNo"
+                      :rules="rules.required"
                       dense
                       outlined
                       persistent-placeholder
-                      prepend-inner-icon="assignment"
                       clearable
                     ></v-text-field>
                   </v-col>
@@ -65,16 +73,18 @@
                     <v-text-field
                       label="Password"
                       placeholder="Enter Password"
+                      prepend-inner-icon="vpn_key"
+                      :type="showPassword ? 'text' : 'password'"
+                      autocomplete="off"
+                      id="password"
+                      v-model="formData.password"
+                      :rules="rules.required"
                       outlined
                       dense
                       required
                       @copy.prevent
                       @paste.prevent
-                      id="password"
                       persistent-placeholder
-                      prepend-inner-icon="vpn_key"
-                      :type="showPassword ? 'text' : 'password'"
-                      autocomplete="off"
                     >
                       <template v-slot:append>
                         <v-btn @click="showPassword = !showPassword" icon>
@@ -83,7 +93,7 @@
                           }}</v-icon>
                         </v-btn>
                       </template>
-                      <template v-slot:message="{}">
+                      <!-- <template v-slot:message="{}">
                         <ul class="my-1">
                           <li
                             v-bind:class="{
@@ -116,34 +126,24 @@
                             Contains Special Character
                           </li>
                         </ul>
-                        <div
-                          class="checkmark_container"
-                          v-bind:class="{ show_checkmark: valid_password }"
-                        >
-                          <svg width="50%" height="50%" viewBox="0 0 140 100">
-                            <path
-                              class="checkmark"
-                              v-bind:class="{ checked: valid_password }"
-                              d="M10,50 l25,40 l95,-70"
-                            />
-                          </svg>
-                        </div>
-                      </template>
+                      </template> -->
                     </v-text-field>
                   </v-col>
                   <v-col cols="12" md="12" sm="12" class="mt-n4">
                     <v-text-field
                       label="Confirm Password"
                       placeholder="Confirm Password"
+                      prepend-inner-icon="vpn_key"
+                      :type="showPassword ? 'text' : 'password'"
+                      id="confirmPassword"
+                      v-model="formData.confirmPassword"
+                      :rules="rules.required"
                       outlined
                       dense
                       @copy.prevent
                       @paste.prevent
-                      id="confirmPassword"
                       required
                       persistent-placeholder
-                      prepend-inner-icon="vpn_key"
-                      :type="showPassword ? 'text' : 'password'"
                     >
                       <template v-slot:append>
                         <v-btn @click="showPassword = !showPassword" icon>
@@ -160,7 +160,7 @@
           </v-card-text>
           <v-divider />
           <v-card-actions>
-            <v-btn class="primary mx-auto">Sign Up</v-btn>
+            <v-btn class="primary mx-auto" @click="Signup">Sign Up</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -175,6 +175,15 @@ export default {
   data() {
     return {
       showPassword: false,
+      isValid: false,
+      formData: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        confirmPassword: "",
+        idNo: "",
+      },
     };
   },
   components: { SideLogo },
@@ -185,8 +194,19 @@ export default {
           (v) => !!v || "E-mail is required",
           (v) => /.+@.+/.test(v) || "E-mail must be valid",
         ],
-        password: [(v) => !!v || "Password is required"],
+        required: [(v) => !!v || "Field is required"],
       };
+    },
+  },
+  methods: {
+    Signup() {
+      if (!this.isValid) {
+        this.$refs.SignupForm.validate();
+      } else if (this.formData.password !== this.formData.confirmPassword) {
+        Event.$emit("Invalid", "Passwords don't match");
+      } else {
+        this.$store.dispatch("", { ...this.formData });
+      }
     },
   },
 };
