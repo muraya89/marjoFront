@@ -24,6 +24,11 @@
       </v-toolbar-title>
       <v-spacer />
       <router-link
+        class="white--text text-capitalize text-decoration-none text-overline mr-5"
+        :to="{ name: 'Login' }"
+        >Login</router-link
+      >
+      <router-link
         class="white--text text-capitalize text-decoration-none text-overline"
         :to="{ name: 'Login' }"
         >About</router-link
