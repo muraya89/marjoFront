@@ -1,49 +1,49 @@
 <template>
   <v-app>
-    <!-- <v-navigation-drawer v-model="drawer">
-      <v-list nav>
-        <v-list-item-group v-model="group">
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer> -->
-    <v-app-bar color="primary">
-      <v-toolbar-title class="white--text">
+    <v-app-bar color="transparent" class="px-15">
+      <v-toolbar-title class="">
         <span id="heading">MARJO cabs services</span>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <router-link
+        class="text-capitalize text-decoration-none text-overline"
+        :to="{ name: 'Login' }"
+      >
+        About
+      </router-link>
+
       <v-spacer />
       <router-link
-        class="white--text text-capitalize text-decoration-none text-overline mr-5"
+        class="text-capitalize text-decoration-none text-overline mr-5"
         :to="{ name: 'Login' }"
-        >Login</router-link
       >
-      <router-link
-        class="white--text text-capitalize text-decoration-none text-overline"
-        :to="{ name: 'Login' }"
-        >About</router-link
+        Login
+      </router-link>
+
+      <v-btn
+        depressed
+        rounded
+        color="primary"
+        @click="$router.replace({ name: 'Signup' })"
       >
+        Create Account
+      </v-btn>
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <router-view name="dashboard" />
+      <router-view name="auth" />
     </v-main>
   </v-app>
 </template>
 
 <script>
+// import Signup from "../../auth/components/Signup.vue";
+
 export default {
   name: "dashboardLayout",
+  // components: { Signup },
   data() {
     return {
       drawer: false,
@@ -59,12 +59,20 @@ export default {
           return link;
         });
     },
+    dialog: {
+      get() {
+        return this.$store.getters["Auth/authGetters"]("modal");
+      },
+      set(val) {
+        this.$store.dispatch("Auth/openModal", val);
+      },
+    },
   },
 };
 </script>
 <style scoped>
 #heading {
-  font-family: Brush Script MT, Brush Script Std, cursive;
+  /* font-family: Brush Script MT, Brush Script Std, cursive; */
   font-size: 35px;
 }
 </style>
