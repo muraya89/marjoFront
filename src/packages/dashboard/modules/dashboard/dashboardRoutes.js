@@ -1,5 +1,6 @@
 import dashboardLayout from "./views/dashboardLayout";
 import landingPage from "./components/landingPage.vue";
+import signup from "../auth/components/Signup.vue";
 
 export default [
   {
@@ -13,7 +14,15 @@ export default [
       {
         path: "landing",
         name: "landingPage",
-        component: landingPage,
+        components: { dashboard: landingPage },
+      },
+      {
+        path: "signup",
+        name: "Signup",
+        components: {
+          dashboard: landingPage,
+          auth: signup,
+        },
       },
     ],
   },
