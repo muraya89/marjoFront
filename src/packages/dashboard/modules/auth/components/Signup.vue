@@ -1,100 +1,127 @@
 <template>
-  <v-dialog v-model="dialog">
-    <v-card>
-      <v-row class="fill-height">
-        <v-col cols="12" md="6" class="">
-          <SideLogo />
-        </v-col>
-        <v-col cols="12" md="6" class="my-auto">
-          <v-card flat>
-            <v-card-text class="d-flex flex-column justify-center">
-              <div class="mx-16 text-center">
-                <v-avatar color="secondary">
-                  <span>MCS</span>
-                </v-avatar>
-                <p class="ma-4 pa-4">ACCOUNT CREATION</p>
-                <v-form class="mt-2" ref="SignupForm" v-model="isValid">
-                  <v-row>
-                    <v-col cols="12" md="12" sm="12">
-                      <v-text-field
-                        label="First Name"
-                        placeholder="Enter your First Name"
-                        prepend-inner-icon="account_circle"
-                        v-model="formData.firstName"
-                        :rules="rules.required"
-                        persistent-placeholder
-                        clearable
-                        outlined
-                        dense
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12" class="mt-n4">
-                      <v-text-field
-                        label="Last Name"
-                        placeholder="Enter your Last Name"
-                        prepend-inner-icon="account_circle"
-                        v-model="formData.lastName"
-                        :rules="rules.required"
-                        persistent-placeholder
-                        clearable
-                        outlined
-                        dense
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12" class="mt-n4">
-                      <v-text-field
-                        label="Email"
-                        placeholder="Email"
-                        prepend-inner-icon="email"
-                        v-model="formData.email"
-                        :rules="rules.email"
-                        persistent-placeholder
-                        clearable
-                        outlined
-                        dense
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12" class="mt-n4">
-                      <v-text-field
-                        label="ID/ Passport No."
-                        placeholder="Enter National ID / Passport  No"
-                        prepend-inner-icon="assignment"
-                        v-model="formData.idNo"
-                        :rules="rules.required"
-                        dense
-                        outlined
-                        persistent-placeholder
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12" class="mt-n4">
-                      <v-text-field
-                        label="Password"
-                        placeholder="Enter Password"
-                        prepend-inner-icon="vpn_key"
-                        :type="showPassword ? 'text' : 'password'"
-                        autocomplete="off"
-                        id="password"
-                        v-model="formData.password"
-                        :rules="rules.required"
-                        outlined
-                        dense
-                        required
-                        @copy.prevent
-                        @paste.prevent
-                        persistent-placeholder
-                      >
-                        <template v-slot:append>
-                          <v-btn @click="showPassword = !showPassword" icon>
-                            <v-icon>{{
-                              showPassword ? "visibility" : "visibility_off"
-                            }}</v-icon>
-                          </v-btn>
-                        </template>
-                        <!-- <template v-slot:message="{}">
+  <v-dialog
+    v-model="dialog"
+    width="40%"
+    :fullscreen="$vuetify.breakpoint.smAndDown"
+  >
+    <v-card flat class="rounded-lg">
+      <v-card-title
+        class="text-center d-flex"
+        :class="$vuetify.breakpoint.smAndDown ? '' : 'mx-10 '"
+      >
+        <v-row no-gutters>
+          <v-col cols="11">
+            <p class="pa-4">ACCOUNT CREATION</p>
+          </v-col>
+
+          <v-col cols="1" class="d-flex align-center">
+            <v-btn
+              icon
+              color="error"
+              class="mt-n4"
+              :to="{ name: 'landingPage' }"
+            >
+              <v-icon color="error">mdi-close</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-title>
+
+      <v-card-text class="d-flex flex-column justify-center">
+        <v-row>
+          <div class="mx-auto mb-3 mt-n3">
+            <v-avatar color="secondary">
+              <span>MCS</span>
+            </v-avatar>
+          </div>
+        </v-row>
+
+        <div
+          class="text-center"
+          :class="$vuetify.breakpoint.smAndDown ? '' : 'mx-10 '"
+        >
+          <v-form class="mt-2" ref="SignupForm" v-model="isValid">
+            <v-row>
+              <!-- firstname -->
+              <v-col cols="12" md="6" sm="12">
+                <v-text-field
+                  label="First Name"
+                  placeholder="Enter your First Name"
+                  v-model="formData.firstName"
+                  :rules="rules.required"
+                  clearable
+                  outlined
+                  dense
+                  required
+                />
+              </v-col>
+              <!-- lastname -->
+              <v-col
+                cols="12"
+                md="6"
+                sm="12"
+                :class="$vuetify.breakpoint.smAndDown ? 'mt-n4' : ''"
+              >
+                <v-text-field
+                  label="Last Name"
+                  placeholder="Enter your Last Name"
+                  v-model="formData.lastName"
+                  :rules="rules.required"
+                  clearable
+                  outlined
+                  dense
+                  required
+                />
+              </v-col>
+              <!-- email -->
+              <v-col cols="12" md="12" sm="12" class="mt-n4">
+                <v-text-field
+                  label="Email"
+                  placeholder="Email"
+                  v-model="formData.email"
+                  :rules="rules.email"
+                  clearable
+                  outlined
+                  dense
+                  required
+                ></v-text-field>
+              </v-col>
+              <!-- id -->
+              <v-col cols="12" md="12" sm="12" class="mt-n4">
+                <v-text-field
+                  label="ID/ Passport No."
+                  placeholder="Enter National ID / Passport  No"
+                  v-model="formData.idNo"
+                  :rules="rules.required"
+                  dense
+                  outlined
+                  clearable
+                ></v-text-field>
+              </v-col>
+              <!-- password -->
+              <v-col cols="12" md="12" sm="12" class="mt-n4">
+                <v-text-field
+                  label="Password"
+                  placeholder="Enter Password"
+                  :type="showPassword ? 'text' : 'password'"
+                  autocomplete="off"
+                  id="password"
+                  v-model="formData.password"
+                  :rules="rules.required"
+                  outlined
+                  dense
+                  required
+                  @copy.prevent
+                  @paste.prevent
+                >
+                  <template v-slot:append>
+                    <v-btn @click="showPassword = !showPassword" icon>
+                      <v-icon size="20">{{
+                        showPassword ? "visibility" : "visibility_off"
+                      }}</v-icon>
+                    </v-btn>
+                  </template>
+                  <!-- <template v-slot:message="{}">
                         <ul class="my-1">
                           <li
                             v-bind:class="{
@@ -128,53 +155,51 @@
                           </li>
                         </ul>
                       </template> -->
-                      </v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12" class="mt-n4">
-                      <v-text-field
-                        label="Confirm Password"
-                        placeholder="Confirm Password"
-                        prepend-inner-icon="vpn_key"
-                        :type="showPassword ? 'text' : 'password'"
-                        id="confirmPassword"
-                        v-model="formData.confirmPassword"
-                        :rules="rules.required"
-                        outlined
-                        dense
-                        @copy.prevent
-                        @paste.prevent
-                        required
-                        persistent-placeholder
-                      >
-                        <template v-slot:append>
-                          <v-btn @click="showPassword = !showPassword" icon>
-                            <v-icon>{{
-                              showPassword ? "visibility" : "visibility_off"
-                            }}</v-icon>
-                          </v-btn>
-                        </template>
-                      </v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-form>
-              </div>
-            </v-card-text>
-            <v-divider />
-            <v-card-actions>
-              <v-btn class="primary mx-auto" @click="Signup">Sign Up</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+                </v-text-field>
+              </v-col>
+              <!-- password -->
+              <v-col cols="12" md="12" sm="12" class="mt-n4">
+                <v-text-field
+                  label="Confirm Password"
+                  placeholder="Confirm Password"
+                  :type="showPassword ? 'text' : 'password'"
+                  id="confirmPassword"
+                  v-model="formData.confirmPassword"
+                  :rules="rules.required"
+                  outlined
+                  dense
+                  @copy.prevent
+                  @paste.prevent
+                  required
+                >
+                  <template v-slot:append>
+                    <v-btn @click="showPassword = !showPassword" icon>
+                      <v-icon size="20">{{
+                        showPassword ? "visibility" : "visibility_off"
+                      }}</v-icon>
+                    </v-btn>
+                  </template>
+                </v-text-field>
+              </v-col>
+            </v-row>
+          </v-form>
+        </div>
+      </v-card-text>
+
+      <v-divider />
+
+      <v-card-actions>
+        <v-btn class="primary mx-auto" @click="Signup">Sign Up</v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 <script>
-import SideLogo from "../../landing/components/SideLogo.vue";
+// import SideLogo from "../../landing/components/SideLogo.vue";
 
 export default {
   name: "Signup",
-  components: { SideLogo },
+  // components: { SideLogo },
   data() {
     return {
       showPassword: false,
@@ -230,5 +255,8 @@ export default {
 .font {
   color: rgba(240, 248, 255, 0.903);
   font-size: 16px !important;
+}
+.v-input__slot::before {
+  border-style: none !important;
 }
 </style>
