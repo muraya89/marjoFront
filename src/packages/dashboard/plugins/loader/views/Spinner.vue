@@ -8,9 +8,9 @@
     <div class="d-flex flex-column">
       <v-progress-circular
         indeterminate
-        size="40"
-        width="2"
-        color="loaderColor"
+        size="100"
+        width="5"
+        color="secondary"
         class="align-self-center mt-3"
       />
     </div>
@@ -23,6 +23,9 @@ export default {
   name: "Spinner",
   components: {
     // spinner,
+  },
+  mounted() {
+    console.log(this.$store.getters["Dashboard/loading"]);
   },
 };
 </script>

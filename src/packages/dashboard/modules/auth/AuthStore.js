@@ -1,5 +1,6 @@
 import call from "../../service/http";
 import AuthConstants from "./AuthConstants";
+import AuthService from "./AuthService";
 
 export default {
   namespaced: true,
@@ -18,6 +19,7 @@ export default {
     openModal({ commit }, payload) {
       commit("MUTATE", { state: "modal", data: payload });
     },
+
     registerUser({ commit }, data) {
       commit("Dashboard/SET_LOADING", true, { root: true });
       call("post", AuthConstants.REGISTER, data)
@@ -25,15 +27,23 @@ export default {
           commit("Dashboard/SET_LOADING", false, { root: true });
           if (res.data.data.user) {
             Event.$emit("ApiSuccess", res.data.message);
-            Event.$emit("route-change", "landingPage");
-            Event.$emit("signup-verify", res.data.data);
+            setTimeout(() => {
+              Event.$emit("route-change", "landingPage");
+              AuthService.login(res.data.data.token, res.data.data.user);
+            }, 2000);
           }
         })
         .catch((error) => {
           console.log(error);
-          //commit("Dashboard/SET_LOADING", false, { root: true });
-          //Event.$emit("ApiError", error.response);
+          commit("Dashboard/SET_LOADING", false, { root: true });
+          Event.$emit("ApiError", error.response);
         });
+    },
+
+    logout: () => {
+      call("post", AuthConstants.LOGOUT).then(() => {
+        AuthService.logout();
+      });
     },
   },
 };
