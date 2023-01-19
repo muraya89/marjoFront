@@ -24,5 +24,11 @@ class AuthService {
 
     location.reload();
   }
+
+  logout() {
+    window.localStorage.removeItem(`${process.env.VUE_APP_NAME}_token`);
+    window.localStorage.removeItem(`${process.env.VUE_APP_NAME}_user`);
+    location.reload();
+  }
 }
 export default new AuthService();

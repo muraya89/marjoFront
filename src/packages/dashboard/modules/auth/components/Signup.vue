@@ -205,15 +205,13 @@
     </v-card>
 
     <Spinner />
-    <OtpVerification />
   </v-dialog>
 </template>
 <script>
-import OtpVerification from "../../../plugins/verify/OtpVerification.vue";
 import Spinner from "@/packages/dashboard/plugins/loader/views/Spinner";
 export default {
   name: "Signup",
-  components: { Spinner, OtpVerification },
+  components: { Spinner },
   data() {
     return {
       showPassword: false,

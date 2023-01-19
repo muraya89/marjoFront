@@ -10,7 +10,7 @@ const listener = {
 
     Event.$on("ApiSuccess", (message) => {
       this.$toast.success(message, {
-        position: "top-right",
+        position: "top-center",
         timeout: 5000,
         closeOnClick: true,
         pauseOnFocusLoss: true,
