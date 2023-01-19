@@ -3,6 +3,7 @@
     v-model="dialog"
     width="40%"
     :fullscreen="$vuetify.breakpoint.smAndDown"
+    persistent
   >
     <v-card flat class="rounded-lg">
       <v-card-title
@@ -42,20 +43,19 @@
         >
           <v-form class="mt-2" ref="SignupForm" v-model="isValid">
             <v-row>
-              <!-- firstname -->
+              <!-- first_name -->
               <v-col cols="12" md="6" sm="12">
                 <v-text-field
                   label="First Name"
                   placeholder="Enter your First Name"
-                  v-model="formData.firstName"
+                  v-model="formData.first_name"
                   :rules="rules.required"
-                  clearable
                   outlined
                   dense
                   required
                 />
               </v-col>
-              <!-- lastname -->
+              <!-- last_name -->
               <v-col
                 cols="12"
                 md="6"
@@ -65,13 +65,26 @@
                 <v-text-field
                   label="Last Name"
                   placeholder="Enter your Last Name"
-                  v-model="formData.lastName"
+                  v-model="formData.last_name"
                   :rules="rules.required"
-                  clearable
                   outlined
                   dense
                   required
                 />
+              </v-col>
+              <v-col cols="12" md="12" sm="12" class="mt-n4">
+                <vue-tel-input-vuetify
+                  required
+                  outlined
+                  default-country="KE"
+                  label="Phone Number"
+                  dense
+                  mode="international"
+                  success="success"
+                  hint="Select country code to proceed"
+                  v-model="formData.phone_number"
+                  :rules="rules.phone"
+                ></vue-tel-input-vuetify>
               </v-col>
               <!-- email -->
               <v-col cols="12" md="12" sm="12" class="mt-n4">
@@ -80,7 +93,6 @@
                   placeholder="Email"
                   v-model="formData.email"
                   :rules="rules.email"
-                  clearable
                   outlined
                   dense
                   required
@@ -91,11 +103,10 @@
                 <v-text-field
                   label="ID/ Passport No."
                   placeholder="Enter National ID / Passport  No"
-                  v-model="formData.idNo"
-                  :rules="rules.required"
+                  v-model="formData.id_number"
+                  :rules="rules.id_number"
                   dense
                   outlined
-                  clearable
                 ></v-text-field>
               </v-col>
               <!-- password -->
@@ -107,7 +118,7 @@
                   autocomplete="off"
                   id="password"
                   v-model="formData.password"
-                  :rules="rules.required"
+                  :rules="rules.pwdRules"
                   outlined
                   dense
                   required
@@ -157,7 +168,7 @@
                       </template> -->
                 </v-text-field>
               </v-col>
-              <!-- password -->
+              <!-- confirm password -->
               <v-col cols="12" md="12" sm="12" class="mt-n4">
                 <v-text-field
                   label="Confirm Password"
@@ -165,7 +176,7 @@
                   :type="showPassword ? 'text' : 'password'"
                   id="confirmPassword"
                   v-model="formData.confirmPassword"
-                  :rules="rules.required"
+                  :rules="rules.pwdConfirm"
                   outlined
                   dense
                   @copy.prevent
@@ -192,25 +203,29 @@
         <v-btn class="primary mx-auto" @click="Signup">Sign Up</v-btn>
       </v-card-actions>
     </v-card>
+
+    <Spinner />
+    <OtpVerification />
   </v-dialog>
 </template>
 <script>
-// import SideLogo from "../../landing/components/SideLogo.vue";
-
+import OtpVerification from "../../../plugins/verify/OtpVerification.vue";
+import Spinner from "@/packages/dashboard/plugins/loader/views/Spinner";
 export default {
   name: "Signup",
-  // components: { SideLogo },
+  components: { Spinner, OtpVerification },
   data() {
     return {
       showPassword: false,
       isValid: false,
       formData: {
         email: "",
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         password: "",
         confirmPassword: "",
-        idNo: "",
+        id_number: "",
+        phone_number: "",
       },
       dialog: true,
     };
@@ -221,6 +236,28 @@ export default {
         email: [
           (v) => !!v || "E-mail is required",
           (v) => /.+@.+/.test(v) || "E-mail must be valid",
+        ],
+        phone: [
+          (v) => !!v || "Phone Number is required",
+          (v) =>
+            /^\+(?:[0-9] ?){6,14}[0-9]$/.test(v) ||
+            "Provide valid phone number",
+        ],
+        id_number: [
+          (v) => !!v || "ID Number is required",
+          (v) => /^[0-9]*$/.test(v) || "Please enter a valid ID/ passport No",
+        ],
+        pwdRules: [
+          (v) => !!v || "Password required",
+          (v) =>
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!#~^()`.,;:{}_/%*?&])[A-Za-z\d@$!#~^()`.,;:{}_/%*?&]{8,16}$/.test(
+              v
+            ) ||
+            "Password should contain: Minimum 8 and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and at least one special character(@$!#~^()`.,;:{}_/%*?&)",
+        ],
+        pwdConfirm: [
+          (v) => !!v || "Confirm password required",
+          (v) => v === this.formData.password || "Passwords do not match",
         ],
         required: [(v) => !!v || "Field is required"],
       };
@@ -233,7 +270,7 @@ export default {
       } else if (this.formData.password !== this.formData.confirmPassword) {
         Event.$emit("Invalid", "Passwords don't match");
       } else {
-        this.$store.dispatch("", { ...this.formData });
+        this.$store.dispatch("Auth/registerUser", { ...this.formData });
       }
     },
   },

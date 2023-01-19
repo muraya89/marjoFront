@@ -1,0 +1,22 @@
+.otp--form.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner {
+    margin-top: 0;
+}
+.otp--form.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded) > .v-input__control > .v-input__slot {
+    padding: 0 0 0 12px;
+}
+.otp--button.v-btn:not(.v-btn--round).v-size--default {
+    height: 50px;
+    min-width: 64px;
+    padding: 0 16px;
+    border-radius: 0 4px 4px 0;
+}
+.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner {
+    margin-top: 8px;
+}
+.verify--button > .v-btn__content {
+    font-size: 16px;
+    text-transform: none;
+}
+.position-relative {
+    position: relative;
+}

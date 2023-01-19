@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     links: [],
+    loading: false,
   },
   mutations: {
     SET_LINKS(state, payload) {
@@ -11,11 +12,15 @@ export default {
         state.links.push(payload);
       }
     },
+    SET_LOADING: (state, payload) => {
+      state.loading = payload;
+    },
   },
   getters: {
     links: (state) => {
       return _.orderBy(state.links, (link) => link.order);
     },
+    loading: (state) => state.loading,
   },
   actions: {},
 };
