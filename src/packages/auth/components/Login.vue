@@ -1,85 +1,129 @@
 <template>
   <v-app>
     <v-container class="pagewrap fill-height">
-      <v-card class="mx-auto">
-        <div class="pagewrap-overlay" color="secondary"></div>
+      <v-row
+        no-gutters
+        align="center"
+        justify="center"
+        style="background-color: #f8f8f8"
+      >
+        <v-col cols="12" md="5" align="center">
+          <v-card
+            class="mx-sm-auto mx-md-10"
+            flat
+            style="background-color: #f8f8f8"
+          >
+            <div
+              class="pagewrap-overlay"
+              color="secondary"
+              v-if="$vuetify.breakpoint.mdAndUp"
+            ></div>
 
-        <v-card-text class="pa-0">
-          <div class="header">
+            <v-card-text class="pa-0">
+              <!-- <div class="header">
             <div class="header-content d-flex">
               <v-btn text dark :to="{ name: 'landingPage' }">
                 <v-icon class="mr-1">mdi-arrow-left</v-icon>
                 <span>Back</span>
               </v-btn>
+
               <h1><span class="taxi">MARJO CABS SERVICES</span></h1>
             </div>
-          </div>
-          <div class="text-center px-15">
-            <v-avatar color="secondary" class="mt-3">
-              <span>MCS</span>
-            </v-avatar>
-            <p class="ma-2 pa-1">LOGIN TO CONTINUE</p>
-            <v-form>
-              <v-text-field
-                ref="email"
-                v-model="formData.email"
-                @copy.prevent
-                outlined
-                label="Email Address"
-                placeholder="Enter your Email Address"
-                prepend-inner-icon="email"
-                :rules="rules.email"
-                autocomplete="false"
-                @keyup.enter="login()"
-              />
+          </div> -->
 
-              <v-text-field
-                ref="password"
-                v-model="formData.password"
-                outlined
-                @copy.prevent
-                label="Password"
-                placeholder="Enter your password"
-                prepend-inner-icon="vpn_key"
-                :type="showPassword ? 'text' : 'password'"
-                :rules="rules.password"
-                autocomplete="false"
-                @keyup.enter="login()"
-              >
-                <template v-slot:append>
-                  <v-btn @click="showPassword = !showPassword" icon>
-                    <v-icon>{{
-                      showPassword ? "visibility" : "visibility_off"
-                    }}</v-icon>
-                  </v-btn>
-                </template>
-              </v-text-field>
-              <div class="d-flex align-center justify-space-between flex-wrap">
-                <v-checkbox label="Remember Me" hide-details class="me-3 mt-1">
-                </v-checkbox>
-                <!-- forgot link -->
-                <router-link
-                  :to="{ name: 'ForgotPassword' }"
-                  class="mt-1 text-decoration-none"
-                  >Forgot Password?
-                </router-link>
+              <div class="text-center px-15">
+                <v-avatar color="secondary" size="128" class="mt-3">
+                  <span>MCS</span>
+                </v-avatar>
+                <p class="ma-2 pa-1">welcome back</p>
+                <v-form>
+                  <v-text-field
+                    ref="email"
+                    v-model="formData.email"
+                    @copy.prevent
+                    outlined
+                    dense
+                    label="Email Address"
+                    placeholder="Enter your Email Address"
+                    :rules="rules.email"
+                    autocomplete="false"
+                    @keyup.enter="login()"
+                  />
+
+                  <v-text-field
+                    ref="password"
+                    v-model="formData.password"
+                    outlined
+                    dense
+                    @copy.prevent
+                    label="Password"
+                    placeholder="Enter your password"
+                    :rules="rules.password"
+                    autocomplete="false"
+                    @keyup.enter="login()"
+                  />
+
+                  <div
+                    class="d-flex align-center justify-space-between flex-wrap"
+                  >
+                    <v-checkbox
+                      label="Remember Me"
+                      hide-details
+                      class="me-3 mt-1"
+                    >
+                    </v-checkbox>
+                    <!-- forgot link -->
+                    <router-link
+                      :to="{ name: 'ForgotPassword' }"
+                      class="mt-1 text-decoration-none"
+                      >Forgot Password?
+                    </router-link>
+                  </div>
+                </v-form>
               </div>
-            </v-form>
-            <div class="d-flex justify-start mt-2">
-              <span class="mt-1 mr-1">Already a member?</span>
+            </v-card-text>
+
+            <v-card-actions class="px-15 d-flex flex-column">
+              <v-btn block color="primary" class="mx-auto">Login</v-btn>
+              <v-container class="d-flex flex-column my-5 px-0">
+                <div class="d-flex flex-row">
+                  <v-divider class="my-auto"></v-divider>
+                  <span class="mx-3">Or </span>
+                  <v-divider class="my-auto"></v-divider>
+                </div>
+
+                <v-btn block outlined class="mt-6">
+                  <v-img
+                    max-width="16"
+                    max-height="16"
+                    class="mr-3 text-capitalize"
+                    :src="require('../../../assets/googleicon.svg')"
+                  ></v-img>
+                  Continue with Google
+                </v-btn>
+              </v-container>
+            </v-card-actions>
+
+            <div class="d-flex justify-center mt-2">
+              <span class="mt-1 mr-1">Don't have an account?</span>
               <router-link
                 :to="{ name: 'Signup' }"
                 class="mt-1 text-decoration-none"
-                >Create an account
+              >
+                Sign up
               </router-link>
             </div>
-          </div>
-        </v-card-text>
+          </v-card>
+        </v-col>
 
-        <v-card-actions class="button">
-          <v-btn color="primary" class="mx-auto" x-large>Login</v-btn>
-        </v-card-actions>
-      </v-card>
+        <v-col cols="7" v-if="$vuetify.breakpoint.mdAndUp">
+          <v-img
+            max-height="100vh"
+            max-width="100wh"
+            src="https://images.unsplash.com/photo-1515595967223-f9fa59af5a3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+          />
+        </v-col>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -109,6 +153,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .header {
   background-color: #004d40;
@@ -175,6 +220,7 @@ header h1:after {
   min-height: 100vh;
   position: relative;
   z-index: 1;
+  padding: 0%;
 }
 
 .pagewrap-overlay {
