@@ -1,4 +1,4 @@
-import dashboardLayout from "./views/dashboardLayout";
+import dashboardLayout from "../../layouts/dashboard/dashboardLayout";
 import landingPage from "./components/landingPage.vue";
 import signup from "../auth/components/Signup.vue";
 

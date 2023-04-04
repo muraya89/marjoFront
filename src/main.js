@@ -6,11 +6,11 @@ import vuetify from "./plugins/vuetify";
 import dashboard from "./packages/dashboard";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import idleVue from "idle-vue";
-import listener from "@/packages/dashboard/mixin/listeners/listener";
+import listener from "@/mixin/listeners/listener";
 import VueTelInputVuetify from "vue-tel-input-vuetify/lib";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
-import verify from "./packages/dashboard/plugins/verify";
+import verify from "./plugins/verify";
 
 Vue.config.productionTip = false;
 

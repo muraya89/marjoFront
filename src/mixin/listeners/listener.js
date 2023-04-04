@@ -1,4 +1,4 @@
-import AuthService from "../../modules/auth/AuthService";
+import AuthService from "../../packages/auth/AuthService";
 
 const listener = {
   mounted: function () {

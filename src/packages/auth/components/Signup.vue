@@ -208,7 +208,7 @@
   </v-dialog>
 </template>
 <script>
-import Spinner from "@/packages/dashboard/plugins/loader/views/Spinner";
+import Spinner from "@/plugins/loader/views/Spinner";
 export default {
   name: "Signup",
   components: { Spinner },

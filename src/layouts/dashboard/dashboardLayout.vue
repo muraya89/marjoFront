@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import Spinner from "../../../plugins/loader/views/Spinner.vue";
-import AuthService from "@/packages/dashboard/modules/auth/AuthService";
+import Spinner from "../../plugins/loader/views/Spinner.vue";
+import AuthService from "@/packages/auth/AuthService";
 
 export default {
   name: "dashboardLayout",
