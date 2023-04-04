@@ -1,16 +1,17 @@
-import { landingStore, landingRoutes } from "./modules/landing";
-import { AuthStore, AuthRoutes } from "./modules/auth";
-import { dashboardRoutes, dashboardStore } from "./modules/dashboard";
+import DashboardRoutes from "./dashboardRoutes";
+import DashboardStore from "./dashboardStore";
+import { AuthRoutes, AuthStore } from "../auth";
 
 export default {
   install(Vue, options) {
-    // eslint-disable-next-line no-global-assign
-    Event = new Vue();
-    options.router.addRoute(...landingRoutes);
-    options.router.addRoute(...AuthRoutes);
-    options.router.addRoute(...dashboardRoutes);
-    options.store.registerModule("Dashboard", dashboardStore);
-    options.store.registerModule("Landing", landingStore);
-    options.store.registerModule("Auth", AuthStore);
+    if (options.router) {
+      options.router.addRoutes(DashboardRoutes);
+      options.router.addRoutes(AuthRoutes);
+    }
+
+    if (options.store) {
+      options.store.registerModule("Auth", AuthStore);
+      options.store.registerModule("Dashboard", DashboardStore);
+    }
   },
 };
