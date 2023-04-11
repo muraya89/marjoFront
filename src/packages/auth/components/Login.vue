@@ -32,10 +32,10 @@
           </div> -->
 
               <div class="text-center px-15">
-                <v-avatar color="secondary" size="128" class="mt-3">
-                  <span>MCS</span>
+                <v-avatar color="secondary" size="125" class="mt-3">
+                  <span class="text-h3">MCS</span>
                 </v-avatar>
-                <p class="ma-2 pa-1">welcome back</p>
+                <p class="ma-2 pa-1 text-h5">welcome back</p>
                 <v-form>
                   <v-text-field
                     ref="email"
@@ -84,7 +84,9 @@
             </v-card-text>
 
             <v-card-actions class="px-15 d-flex flex-column">
-              <v-btn block color="primary" class="mx-auto">Login</v-btn>
+              <v-btn block color="primary" class="mx-auto" @click="login">
+                Login
+              </v-btn>
               <v-container class="d-flex flex-column my-5 px-0">
                 <div class="d-flex flex-row">
                   <v-divider class="my-auto"></v-divider>
@@ -149,6 +151,11 @@ export default {
         ],
         password: [(v) => !!v || "Password is required"],
       };
+    },
+  },
+  methods: {
+    login() {
+      this.$store.dispatch("Auth/login", this.formData);
     },
   },
 };

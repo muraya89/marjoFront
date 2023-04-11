@@ -33,40 +33,51 @@
         </v-btn>
       </div>
 
-      <div v-else>
-        <span>{{ `${profile.first_name} ${profile.last_name}` }}</span>
+      <div v-else class="d-flex">
+        <span class="mt-3">
+          {{ `${profile.first_name} ${profile.last_name}` }}
+        </span>
 
-        <v-avatar color="grey" size="50" class="ml-3">
-          <v-avatar size="42">
-            <v-img v-if="profile.avatar" :src="profile.avatar" />
-
-            <v-img v-else src="@/assets/Mercedes.jpg"></v-img>
-          </v-avatar>
-        </v-avatar>
-
-        <v-menu offset-y>
+        <v-menu offset-y offset-x style="left: 1250px">
           <template v-slot:activator="{ on, attrs }">
-            <v-icon v-on="on" :attrs="attrs" class="mt-6" small>
-              mdi-chevron-down
-            </v-icon>
+            <div
+              v-on="on"
+              :attrs="attrs"
+              class="d-flex flex-row"
+              style="cursor: pointer"
+            >
+              <v-avatar color="grey" size="50" class="ml-3">
+                <v-avatar size="42">
+                  <v-img v-if="profile.avatar" :src="profile.avatar" />
+
+                  <v-img v-else>
+                    <v-icon dark size="40">mdi-account</v-icon>
+                  </v-img>
+                </v-avatar>
+              </v-avatar>
+
+              <v-icon class="mt-6" small> mdi-chevron-down </v-icon>
+            </div>
           </template>
 
-          <v-list dense>
-            <v-list-item
-              dense
-              v-for="(sub, i) in toolBarTopLinks"
-              :key="i"
-              :disabled="sub.disabled"
-              link
-              @click="dispatchAction(sub.action)"
-            >
-              <v-list-item-icon>
-                <v-icon>{{ sub.icon }}</v-icon>
-              </v-list-item-icon>
+          <v-card class="px-4" flat width="200">
+            <v-list dense>
+              <v-list-item
+                dense
+                v-for="(sub, i) in toolBarTopLinks"
+                :key="i"
+                :disabled="sub.disabled"
+                link
+                @click="dispatchAction(sub.action)"
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ sub.icon }}</v-icon>
+                </v-list-item-icon>
 
-              <v-list-item-title>{{ sub.text }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
+                <v-list-item-title>{{ sub.text }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-card>
         </v-menu>
       </div>
     </v-app-bar>
@@ -92,12 +103,20 @@ export default {
       group: null,
       toolBarTopLinks: [
         {
-          action: "logout",
+          action: "profile",
           order: 1,
+          icon: "mdi-account-outline",
+          disabled: false,
+          iconColor: "blue",
+          text: "Profile"
+        },
+        {
+          action: "logout",
+          order: 2,
           icon: "logout",
           disabled: false,
           iconColor: "green",
-          text: "Logout",
+          text: "Logout"
         },
       ],
     };
