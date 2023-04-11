@@ -1,4 +1,5 @@
 export default {
   REGISTER: "auth",
-  LOGOUT: "auth/logout",
+  LOGIN: "auth/login",
+  LOGOUT: "auth/logout"
 };
