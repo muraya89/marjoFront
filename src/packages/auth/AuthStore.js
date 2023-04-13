@@ -54,7 +54,7 @@ export default {
           commit("Dashboard/SET_LOADING", false, { root: true });
           if (res.data.data.user) {
             Event.$emit("ApiSuccess", res.data.message);
-            Event.$emit("route-change", "landingPage");
+            Event.$emit("route-change", "ApplicationDashboard");
             AuthService.login(res.data.data.token, res.data.data.user);
           }
         })
