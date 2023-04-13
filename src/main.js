@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import dashboard from "./packages/dashboard";
+import Application from "./packages/application";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import idleVue from "idle-vue";
 import listener from "@/mixin/listeners/listener";
@@ -24,6 +25,7 @@ const options = {
 };
 
 Vue.use(dashboard, options, idleVue);
+Vue.use(Application, options)
 Vue.use(listener, options);
 Vue.use(VueTelInputVuetify, { vuetify });
 Vue.use(Toast);

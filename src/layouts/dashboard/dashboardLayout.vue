@@ -34,9 +34,11 @@
       </div>
 
       <div v-else class="d-flex">
-        <span class="mt-3">
+        <v-icon class="mx-3">mdi-bell-outline</v-icon>
+        <v-icon class="mx-3">mdi-cog-outline</v-icon>
+        <!-- <span class="mt-1">
           {{ `${profile.first_name} ${profile.last_name}` }}
-        </span>
+        </span> -->
 
         <v-menu offset-y offset-x style="left: 1250px">
           <template v-slot:activator="{ on, attrs }">
@@ -46,17 +48,17 @@
               class="d-flex flex-row"
               style="cursor: pointer"
             >
-              <v-avatar color="grey" size="50" class="ml-3">
-                <v-avatar size="42">
+              <v-avatar color="grey" size="30" class="ml-3 mt-1">
+                <v-avatar size="22">
                   <v-img v-if="profile.avatar" :src="profile.avatar" />
 
                   <v-img v-else>
-                    <v-icon dark size="40">mdi-account</v-icon>
+                    <v-icon dark size="30">mdi-account</v-icon>
                   </v-img>
                 </v-avatar>
               </v-avatar>
 
-              <v-icon class="mt-6" small> mdi-chevron-down </v-icon>
+              <v-icon class="mt-1 ml-1" small> mdi-chevron-down </v-icon>
             </div>
           </template>
 
@@ -84,7 +86,7 @@
 
     <v-main>
       <router-view name="dashboard" />
-      <router-view name="auth" />
+      <router-view name="view" />
       <Spinner />
     </v-main>
   </v-app>
