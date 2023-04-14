@@ -1,7 +1,6 @@
 <template>
   <v-container>
-    <router-view name="dashboard" />
-    <router-view name="view" />
+    <router-view />
   </v-container>
 </template>
 <script>
