@@ -20,7 +20,7 @@ export default [
           {
             path: "home",
             name: "ApplicationDashboard",
-            components: { view: ApplicationDashboard },
+            component: ApplicationDashboard,
             meta: { middleware: [Auth] },
           },
         ],

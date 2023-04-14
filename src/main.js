@@ -25,7 +25,7 @@ const options = {
 };
 
 Vue.use(dashboard, options, idleVue);
-Vue.use(Application, options)
+Vue.use(Application, options);
 Vue.use(listener, options);
 Vue.use(VueTelInputVuetify, { vuetify });
 Vue.use(Toast);

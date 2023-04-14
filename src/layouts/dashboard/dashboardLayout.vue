@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar color="transparent" class="px-15">
+    <v-app-bar app color="transparent" class="px-15">
       <v-toolbar-title class="">
         <span id="heading">MARJO cabs services</span>
       </v-toolbar-title>
@@ -110,7 +110,7 @@ export default {
           icon: "mdi-account-outline",
           disabled: false,
           iconColor: "blue",
-          text: "Profile"
+          text: "Profile",
         },
         {
           action: "logout",
@@ -118,7 +118,7 @@ export default {
           icon: "logout",
           disabled: false,
           iconColor: "green",
-          text: "Logout"
+          text: "Logout",
         },
       ],
     };
