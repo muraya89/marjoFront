@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="transparent" class="px-15">
+    <v-app-bar app color="transparent" class="px-15" elevation="0">
       <v-toolbar-title class="">
         <span id="heading">MARJO cabs services</span>
       </v-toolbar-title>
@@ -127,6 +127,7 @@ export default {
     next((v) => {
       if (AuthService.check()) {
         v.$store.dispatch("Dashboard/profile");
+        v.$router.push({ name: "ApplicationDashboard" });
       }
     });
   },
