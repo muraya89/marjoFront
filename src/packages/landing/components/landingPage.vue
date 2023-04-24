@@ -10,7 +10,7 @@
               class="primary white--text mr-15"
               x-large
               elevation="0"
-              :to="{ name: 'Login' }"
+              :to="{ name: 'ApplicationDashboard' }"
             >
               book a cab
             </v-btn>

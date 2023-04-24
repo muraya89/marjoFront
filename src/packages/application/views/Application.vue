@@ -1,6 +1,7 @@
 <template>
-  <v-container>
-    <router-view />
+  <v-container fluid>
+    <router-view name="view"/>
+    <router-view name="action"/>
   </v-container>
 </template>
 <script>

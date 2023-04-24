@@ -1,187 +1,122 @@
 <template>
-  <v-card>
+  <v-card class="mx-md-8 my-auto">
     <v-card-text>
       <v-row>
-        <v-col cols="12" md="6">
-          <v-card-title class="text-h4">Request a car</v-card-title>
-          <v-subheader class="mt-n6">Book car in easy steps</v-subheader>
-
-          <v-stepper v-model="e1" alt-labels>
-            <v-stepper-header>
-              <v-stepper-step step="1" editable>
-                Enter ride details
-              </v-stepper-step>
-              <v-divider />
-
-              <v-stepper-step step="2" editable>
-                Choose vehicle
-              </v-stepper-step>
-              <v-divider />
-
-              <v-stepper-step step="3" editable>
-                Enter contact details
-              </v-stepper-step>
-              <v-divider />
-
-              <v-stepper-step step="4" editable>
-                Booking Summary
-              </v-stepper-step>
-            </v-stepper-header>
-
-            <v-stepper-items>
-              <v-stepper-content step="1">
-                <v-card
-                  class="mb-12"
-                  color="grey lighten-1"
-                  height="200px"
-                ></v-card>
-
-                <v-btn color="primary" @click="nextStep()"> Continue </v-btn>
-
-                <v-btn text> Cancel </v-btn>
-              </v-stepper-content>
-              <v-stepper-content step="2">
-                <v-card
-                  class="mb-12"
-                  color="grey lighten-1"
-                  height="200px"
-                ></v-card>
-
-                <v-btn color="primary" @click="nextStep()"> Continue </v-btn>
-
-                <v-btn text> Cancel </v-btn>
-              </v-stepper-content>
-            </v-stepper-items>
-          </v-stepper>
-
-          <!-- pickup location -->
-          <v-col cols="12">
-            <v-text-field
-              filled
-              single-line
-              dense
-              rounded
-              label="Pickup Location"
-              :rules="rules.required"
-              v-model="formData.pickUpLocation"
-            >
-              <template v-slot:prepend-inner>
-                <v-icon color="primary" class="mr-3">mdi-map-marker</v-icon>
-              </template>
-            </v-text-field>
-          </v-col>
-
-          <!-- same location -->
-          <v-col cols="12" class="mt-n12 ml-4 d-flex">
-            <v-checkbox color="primary" v-model="formData.sameLocation">
-              <template v-slot:label>
-                <span class="primary--text">Return at the same Address</span>
-              </template>
-            </v-checkbox>
-            <!-- <span class="primary--text">Return at the same Address</span> -->
-            <!-- <v-icon color="primary" size="18"> mdi-chevron-down </v-icon> -->
-          </v-col>
-
-          <!-- dropoff location -->
-          <v-col cols="12" v-if="!formData.sameLocation" class="mt-n7">
-            <v-text-field
-              filled
-              single-line
-              dense
-              rounded
-              label="Drop off Location"
-              :rules="rules.required"
-              v-model="formData.dropoffLocation"
-            >
-              <template v-slot:prepend-inner>
-                <v-icon color="primary" class="mr-3">mdi-map-marker</v-icon>
-              </template>
-            </v-text-field>
-          </v-col>
-
-          <v-col cols="12" class="mt-n6">
-            <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-bind="attrs"
-                  v-on="on"
-                  filled
-                  single-line
-                  dense
-                  rounded
-                  v-model="dateRangeText"
-                  label="Date range"
-                  readonly
-                >
-                  <template v-slot:prepend-inner>
-                    <v-icon color="primary" class="mr-3">mdi-calendar</v-icon>
-                  </template>
-                </v-text-field>
-              </template>
-              <v-date-picker
-                v-model="formData.dates"
-                range
-                :min="
-                  new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                    .toISOString()
-                    .substr(0, 10)
-                "
-              ></v-date-picker>
-            </v-menu>
-          </v-col>
-
-          <v-col cols="12" class="mt-n7">
-            <v-row>
-              <v-col cols="6">
-                <v-text-field
-                  filled
-                  single-line
-                  dense
-                  rounded
-                  label="Pickup Time"
-                  :rules="rules.required"
-                  v-model="formData.pickUpTime"
-                >
-                  <template v-slot:prepend-inner>
-                    <v-icon color="primary" class="mr-3">mdi-clock-in</v-icon>
-                  </template>
-                </v-text-field>
-              </v-col>
-
-              <v-col cols="6">
-                <v-text-field
-                  filled
-                  single-line
-                  dense
-                  rounded
-                  label="Dropoff Time"
-                  :rules="rules.required"
-                  v-model="formData.dropOffTime"
-                >
-                  <template v-slot:prepend-inner>
-                    <v-icon color="primary" class="mr-3">mdi-clock-out</v-icon>
-                  </template>
-                </v-text-field>
-              </v-col>
-            </v-row>
-          </v-col>
-
-          <v-card-actions class="mt-n4">
-            <v-btn primary block rounded color="primary">Search car</v-btn>
-          </v-card-actions>
+        <v-col cols="12" md="5">
+          <Booking />
         </v-col>
 
-        <v-col cols="12" md="6">
-          <v-card outlined>
-            <v-card-text></v-card-text>
-          </v-card>
+        <v-col cols="12" md="7">
+          <v-row>
+            <v-col cols="12" class="d-flex">
+              <v-spacer></v-spacer>
+              <router-link :to="{ name: '' }">show more</router-link>
+            </v-col>
+          </v-row>
+          <!-- <div> -->
+          <!-- <v-col v-for="n in 4" :key="n">
+              <v-card outlined class="mt-3" max-width="250">
+                <v-card-title>Toyota RAV4 Hybrid SUV</v-card-title>
+                <v-card-text>
+                  <v-img
+                    contain
+                    height="200"
+                    width="200"
+                    src="@/assets/rav4.png"
+                  />
+
+                  <div>
+                    <v-row>
+                      <v-col cols="12" md="4" sm="6" class="d-flex flex-column">
+                        <v-icon color="primary">mdi-account-group</v-icon>
+                        <div>5 seats</div>
+                      </v-col>
+                      <v-col cols="12" md="4" sm="6" class="d-flex flex-column">
+                        <v-icon color="primary">mdi-car-convertible</v-icon>
+                        <span>AWD</span>
+                      </v-col>
+                      <v-col cols="12" md="4" sm="6" class="d-flex flex-column">
+                        <v-icon color="primary">mdi-gas-station</v-icon>
+                        <span>40 MPG</span>
+                      </v-col>
+                    </v-row>
+
+                    <v-card-actions>
+                      <v-btn color="primary" block rounded small>
+                        book SUV</v-btn
+                      >
+                    </v-card-actions>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-col> -->
+          <v-sheet min-width="650">
+            <v-slide-group multiple show-arrows>
+              <v-slide-item v-for="n in 4" :key="n">
+                <v-card outlined class="mt-3 mx-2 py-10 px-4" max-width="270">
+                  <v-card-title class="wrap">
+                    Toyota RAV4 Hybrid SUV
+                  </v-card-title>
+
+                  <v-card-text>
+                    <v-img
+                      contain
+                      height="200"
+                      width="200"
+                      src="@/assets/rav4.png"
+                    />
+
+                    <div class="my-4">
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          md="4"
+                          sm="6"
+                          class="d-flex flex-column"
+                        >
+                          <v-icon color="primary">mdi-account-group</v-icon>
+                          <div>5 seats</div>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="4"
+                          sm="6"
+                          class="d-flex flex-column"
+                        >
+                          <v-icon color="primary">mdi-car-convertible</v-icon>
+                          <span>AWD</span>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="4"
+                          sm="6"
+                          class="d-flex flex-column"
+                        >
+                          <v-icon color="primary">mdi-gas-station</v-icon>
+                          <span>40 MPG</span>
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </v-card-text>
+
+                  <v-card-actions class="mb-2 d-flex flex-column">
+                    <v-btn
+                      color="primary"
+                      block
+                      rounded
+                      :to="{ name: 'CarView' }"
+                    >
+                      book SUV
+                    </v-btn>
+                    <span class="mt-10 text--disabled">
+                      Choose accessories in next step
+                    </span>
+                  </v-card-actions>
+                </v-card>
+              </v-slide-item>
+            </v-slide-group>
+          </v-sheet>
+          <!-- </div> -->
         </v-col>
       </v-row>
     </v-card-text>
@@ -189,57 +124,19 @@
 </template>
 <script>
 import helpers from "../../dashboard/utils/helpers/helper.js";
+import Booking from "./Booking.vue";
 export default {
   name: "ApplicationDashboard",
   mixins: [helpers],
-  data() {
-    return {
-      activePicker: null,
-      menu: false,
-      formData: {
-        pickUpLocation: "",
-        dates: [],
-        sameLocation: true,
-        dropoffLocation: "",
-      },
-      e1: 1,
-      steps: 2,
-    };
-  },
-  computed: {
-    rules() {
-      return {
-        required: [(v) => !!v || "field is required"],
-      };
-    },
-    dateRangeText() {
-      return this.formData.dates.join(" - ");
-    },
-  },
+  components: { Booking },
   methods: {
-    nextStep(n) {
-      if (n === this.steps) {
-        this.e1 = 1;
-      } else {
-        this.e1 = n + 1;
-      }
-    },
-  },
-  watch: {
-    menu(val) {
-      val && setTimeout(() => (this.activePicker = "YEAR"));
-    },
-    steps(val) {
-      if (this.e1 > val) {
-        this.e1 = val;
-      }
-    },
+    openDialog() {},
   },
 };
 </script>
-<style>
-.v-input__slot::before {
-  border-style: none !important;
-  color: aqua;
+<style scoped>
+.wrap {
+  display: inline-block;
+  word-break: break-word;
 }
 </style>

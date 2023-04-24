@@ -155,7 +155,7 @@ class Helper {
       new: "deep-orange lighten-1",
       draft: "indigo lighten-1",
       pending: "orange lighten-1",
-      review: "teal lighten-1",
+      returned: "teal lighten-1",
       open: "amber lighten-1",
       accepted: "primary",
       declined: "red lighten-1",
@@ -165,6 +165,73 @@ class Helper {
       released: "primary",
       UnitBooking: "red",
     };
+  }
+  getColor(status) {
+    let colorObject = {};
+    switch (status) {
+      case "Open":
+      case "Draft":
+        colorObject = {
+          icon_color: "amber lighten-1",
+          icon: "error_outline",
+          color: "warning",
+        };
+        break;
+      case "Returned":
+        colorObject = {
+          icon_color: "orange lighten-1",
+          icon: "rate_review",
+          color: "orange",
+        };
+        break;
+      case "Pending":
+      case "Pending Approval":
+        colorObject = {
+          icon_color: "yellow darken-1",
+          icon: "rate_review",
+          color: "yellow darken-2",
+        };
+        break;
+      case "Released":
+      case "Issued":
+        colorObject = {
+          icon_color: "green lighten-1",
+          icon: "done",
+          color: "success",
+        };
+        break;
+      case "Posted":
+        colorObject = {
+          icon_color: "teal lighten-1",
+          icon: "done",
+          color: "teal accent-3",
+        };
+        break;
+      case "Approved":
+        colorObject = {
+          icon_color: "green lighten-1",
+          icon: "done",
+          color: "success",
+        };
+        break;
+      case "Rejected":
+      case "Declined":
+      case "Canceled":
+        colorObject = {
+          icon_color: "deep-orange lighten-1",
+          icon: "close",
+          color: "red",
+        };
+        break;
+      default:
+        colorObject = {
+          icon_color: "blue lighten-1",
+          icon: "new_releases",
+          color: "info",
+        };
+        break;
+    }
+    return colorObject;
   }
 }
 export default new Helper();
