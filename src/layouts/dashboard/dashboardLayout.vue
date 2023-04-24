@@ -6,12 +6,44 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <router-link
-        class="text-capitalize text-decoration-none text-overline"
-        :to="{ name: 'Login' }"
-      >
-        About
-      </router-link>
+      <v-row>
+        <!-- home -->
+        <v-col cols="3">
+          <router-link
+            class="text-capitalize text-decoration-none text-overline"
+            :to="{ name: 'landingPage' }"
+          >
+            Home
+          </router-link>
+        </v-col>
+        <!-- about -->
+        <v-col cols="3">
+          <router-link
+            class="text-capitalize text-decoration-none text-overline"
+            :to="{ name: '' }"
+          >
+            About
+          </router-link>
+        </v-col>
+        <!-- booking -->
+        <v-col cols="3">
+          <router-link
+            class="text-capitalize text-decoration-none text-overline"
+            :to="{ name: 'ApplicationDashboard' }"
+          >
+            Booking
+          </router-link>
+        </v-col>
+        <!-- booking history -->
+        <v-col cols="3">
+          <router-link
+            class="text-capitalize text-decoration-none text-overline"
+            :to="{ name: 'BookingHistory' }"
+          >
+            History
+          </router-link>
+        </v-col>
+      </v-row>
 
       <v-spacer />
 
@@ -127,7 +159,7 @@ export default {
     next((v) => {
       if (AuthService.check()) {
         v.$store.dispatch("Dashboard/profile");
-        v.$router.push({ name: "ApplicationDashboard" });
+        // v.$router.push({ name: "ApplicationDashboard" });
       }
     });
   },
