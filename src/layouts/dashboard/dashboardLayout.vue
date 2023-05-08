@@ -160,6 +160,8 @@ export default {
       if (AuthService.check()) {
         v.$store.dispatch("Dashboard/profile");
         // v.$router.push({ name: "ApplicationDashboard" });
+      } else {
+        v.$router.push({ name: "Login" });
       }
     });
   },
