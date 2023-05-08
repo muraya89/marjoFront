@@ -55,6 +55,8 @@
                     v-model="formData.password"
                     outlined
                     dense
+                    name="password"
+                    type="password"
                     @copy.prevent
                     label="Password"
                     placeholder="Enter your password"
