@@ -50,12 +50,13 @@
                 </v-card-text>
               </v-card>
             </v-col> -->
+
           <v-sheet min-width="650">
             <v-slide-group multiple show-arrows>
-              <v-slide-item v-for="n in 4" :key="n">
+              <v-slide-item v-for="(car, i) in cars" :key="i">
                 <v-card outlined class="mt-3 mx-2 py-10 px-4" max-width="270">
                   <v-card-title class="wrap">
-                    Toyota RAV4 Hybrid SUV
+                    {{ car.model }} {{ car.brand }}
                   </v-card-title>
 
                   <v-card-text>
@@ -63,7 +64,7 @@
                       contain
                       height="200"
                       width="200"
-                      src="@/assets/rav4.png"
+                      :src="`${images(car.image, car.id)}`"
                     />
 
                     <div class="my-4">
@@ -128,9 +129,31 @@ import Booking from "./Booking.vue";
 export default {
   name: "ApplicationDashboard",
   mixins: [helpers],
+  data() {
+    return {
+      url: process.env.VUE_APP_TEMP_URL,
+    };
+  },
+  computed: {
+    cars() {
+      return this.$store.getters["Application/applicationGetters"]("cars");
+    },
+  },
   components: { Booking },
   methods: {
     openDialog() {},
+    images(images, id) {
+      if (images) {
+        console.log(
+          this.url +
+            "/storage/car_images/car" +
+            id +
+            "/" +
+            JSON.parse(images)[0]
+        );
+        this.url + "/storage/car_images/car" + id + "/" + JSON.parse(images)[0];
+      }
+    },
   },
 };
 </script>
