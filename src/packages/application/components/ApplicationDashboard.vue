@@ -61,12 +61,35 @@
 
                   <v-card-text>
                     <v-img
+                      v-if="car.image"
                       contain
                       height="200"
                       width="200"
                       :src="`${images(car.image, car.id)}`"
-                    />
-
+                    >
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="fill-height ma-0"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                    <div
+                      v-else
+                      class="px-auto"
+                      align="center"
+                      style="height: 200px; display: flex"
+                    >
+                      <v-icon size="50" class="ma-auto">
+                        mdi-image-off-outline
+                      </v-icon>
+                    </div>
                     <div class="my-4">
                       <v-row>
                         <v-col
@@ -105,7 +128,7 @@
                       color="primary"
                       block
                       rounded
-                      :to="{ name: 'CarView' }"
+                      :to="{ name: 'CarView', params: { id: car.id } }"
                     >
                       book SUV
                     </v-btn>
@@ -144,14 +167,13 @@ export default {
     openDialog() {},
     images(images, id) {
       if (images) {
-        console.log(
+        return (
           this.url +
-            "/storage/car_images/car" +
-            id +
-            "/" +
-            JSON.parse(images)[0]
+          "/storage/car_images/car" +
+          id +
+          "/" +
+          JSON.parse(images)[0]
         );
-        this.url + "/storage/car_images/car" + id + "/" + JSON.parse(images)[0];
       }
     },
   },

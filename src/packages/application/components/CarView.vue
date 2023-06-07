@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="800">
+  <v-dialog v-model="dialog" persistent max-width="1000">
     <v-card>
       <v-card-title>
         Car Request
@@ -11,21 +11,21 @@
       <v-card-text>
         <v-row>
           <v-col cols="12" md="6">
-            <v-card-title>Car</v-card-title>
-
             <v-card-text class="mt-n10">
-              <v-img
-                src="@/assets/rav4.png"
-                contain
-                height="150"
-                width="150"
-              ></v-img>
+              <v-carousel hide-delimiter-background delimiter-icon="mdi-minus">
+                <v-carousel-item
+                  v-for="(image, i) in carImages"
+                  :key="i"
+                  :src="url + '/storage/car_images/car' + car.id + '/' + image"
+                >
+                </v-carousel-item>
+              </v-carousel>
 
               <span class="text-body-1 font-weight-bold">
-                Toyota RAV4 Hybrid SUV
+                {{ car.model }} -&nbsp; {{ car.brand }}
               </span>
 
-              <v-form class="d-flex flex-column">
+              <!-- <v-form class="d-flex flex-column">
                 <span class="text--secondary">Start</span>
                 <span class="font-weight-black">Mon, Sep, 26 at 9:00AM</span>
                 <span class="text--secondary">End</span>
@@ -34,7 +34,85 @@
                 <span class="font-weight-black">Home</span>
                 <span class="text--secondary">Driving Days</span>
                 <span class="font-weight-black">1</span>
-              </v-form>
+                <span class="text--secondary">Fuel Type</span>
+                <span class="font-weight-black">{{ car.fuel_type }}</span>
+                <span class="text--secondary">Mileage</span>
+                <span class="font-weight-black">{{ car.mileage }}</span>
+                <span class="text--secondary">Seats</span>
+                <span class="font-weight-black">{{ car.seats }}</span>
+                <span class="text--secondary">Transmission</span>
+                <span class="font-weight-black">{{ car.transmission }}</span>
+              </v-form> -->
+
+              <v-list dense>
+                <template>
+                  <!-- <v-divider inset></v-divider> -->
+                  <v-list-item>
+                    <v-list-item-avatar> color </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        {{ car.color }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider inset></v-divider>
+                  <v-list-item>
+                    <v-list-item-avatar> Fuel Type </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        {{ car.fuel_type }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider inset></v-divider>
+                  <v-list-item>
+                    <v-list-item-avatar> Mileage </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        {{ car.mileage }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider inset></v-divider>
+                  <v-list-item>
+                    <v-list-item-avatar> Seats </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        {{ car.seats }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider inset></v-divider>
+                  <v-list-item>
+                    <v-list-item-avatar> Transmission </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        {{ car.transmission }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider inset></v-divider>
+                  <v-list-item>
+                    <v-list-item-avatar> Year </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-subtitle>
+                        {{ car.year }}
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+              </v-list>
             </v-card-text>
           </v-col>
 
@@ -81,7 +159,21 @@ export default {
   data() {
     return {
       dialog: true,
+      url: process.env.VUE_APP_TEMP_URL,
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    next((v) => {
+      v.$store.dispatch("Application/getCar", v.$route.params.id);
+    });
+  },
+  computed: {
+    car() {
+      return this.$store.getters["Application/applicationGetters"]("car");
+    },
+    carImages() {
+      return this.car ? JSON.parse(this.car.image) : "";
+    },
   },
 };
 </script>
