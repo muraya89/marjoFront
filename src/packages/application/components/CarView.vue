@@ -10,9 +10,14 @@
 
       <v-card-text>
         <v-row>
+          <!-- car data -->
           <v-col cols="12" md="6">
             <v-card-text class="mt-n10">
-              <v-carousel hide-delimiter-background delimiter-icon="mdi-minus">
+              <v-carousel
+                hide-delimiter-background
+                delimiter-icon="mdi-minus"
+                v-if="carImages"
+              >
                 <v-carousel-item
                   v-for="(image, i) in carImages"
                   :key="i"
@@ -21,32 +26,94 @@
                 </v-carousel-item>
               </v-carousel>
 
+              <div
+                v-else
+                class="px-auto"
+                align="center"
+                style="height: 400px; display: flex"
+              >
+                <v-icon size="60" class="ma-auto">
+                  mdi-image-off-outline
+                </v-icon>
+              </div>
+
               <span class="text-body-1 font-weight-bold">
                 {{ car.model }} -&nbsp; {{ car.brand }}
               </span>
 
-              <!-- <v-form class="d-flex flex-column">
-                <span class="text--secondary">Start</span>
-                <span class="font-weight-black">Mon, Sep, 26 at 9:00AM</span>
-                <span class="text--secondary">End</span>
-                <span class="font-weight-black">Mon, Sep, 26 at 10:00PM</span>
-                <span class="text--secondary">Delivery/Return</span>
-                <span class="font-weight-black">Home</span>
-                <span class="text--secondary">Driving Days</span>
-                <span class="font-weight-black">1</span>
-                <span class="text--secondary">Fuel Type</span>
-                <span class="font-weight-black">{{ car.fuel_type }}</span>
-                <span class="text--secondary">Mileage</span>
-                <span class="font-weight-black">{{ car.mileage }}</span>
-                <span class="text--secondary">Seats</span>
-                <span class="font-weight-black">{{ car.seats }}</span>
-                <span class="text--secondary">Transmission</span>
-                <span class="font-weight-black">{{ car.transmission }}</span>
-              </v-form> -->
+              <v-form class="d-flex flex-column">
+                <v-row no-gutters>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Start</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">
+                      Mon, Sep, 26 at 9:00AM
+                    </span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">End</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black"
+                      >Mon, Sep, 26 at 10:00PM</span
+                    >
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Delivery/Return</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">Home</span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Driving Days</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">1</span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Fuel Type</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">{{ car.fuel_type }}</span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Color</span>
+                  </v-col>
+                  <v-col cols="8" class="d-flex">
+                    <v-avatar
+                      :color="car.color"
+                      size="12"
+                      class="mr-1"
+                      style="margin-top: 7px"
+                    ></v-avatar>
+                    <span class="font-weight-black">{{ car.color }}</span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Mileage</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">{{ car.mileage }}</span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Seats</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">{{ car.seats }}</span>
+                  </v-col>
+                  <v-col cols="4" class="mb-2">
+                    <span class="text--secondary">Transmission</span>
+                  </v-col>
+                  <v-col cols="8">
+                    <span class="font-weight-black">{{
+                      car.transmission
+                    }}</span>
+                  </v-col>
+                </v-row>
+              </v-form>
 
-              <v-list dense>
+              <!-- <v-list dense>
                 <template>
-                  <!-- <v-divider inset></v-divider> -->
                   <v-list-item>
                     <v-list-item-avatar> color </v-list-item-avatar>
 
@@ -112,7 +179,7 @@
                     </v-list-item-content>
                   </v-list-item>
                 </template>
-              </v-list>
+              </v-list> -->
             </v-card-text>
           </v-col>
 
@@ -172,7 +239,9 @@ export default {
       return this.$store.getters["Application/applicationGetters"]("car");
     },
     carImages() {
-      return this.car ? JSON.parse(this.car.image) : "";
+      return Object.keys(this.car).length !== 0 && this.car.image
+        ? JSON.parse(this.car.image)
+        : "";
     },
   },
 };

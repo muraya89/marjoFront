@@ -13,50 +13,13 @@
               <router-link :to="{ name: '' }">show more</router-link>
             </v-col>
           </v-row>
-          <!-- <div> -->
-          <!-- <v-col v-for="n in 4" :key="n">
-              <v-card outlined class="mt-3" max-width="250">
-                <v-card-title>Toyota RAV4 Hybrid SUV</v-card-title>
-                <v-card-text>
-                  <v-img
-                    contain
-                    height="200"
-                    width="200"
-                    src="@/assets/rav4.png"
-                  />
-
-                  <div>
-                    <v-row>
-                      <v-col cols="12" md="4" sm="6" class="d-flex flex-column">
-                        <v-icon color="primary">mdi-account-group</v-icon>
-                        <div>5 seats</div>
-                      </v-col>
-                      <v-col cols="12" md="4" sm="6" class="d-flex flex-column">
-                        <v-icon color="primary">mdi-car-convertible</v-icon>
-                        <span>AWD</span>
-                      </v-col>
-                      <v-col cols="12" md="4" sm="6" class="d-flex flex-column">
-                        <v-icon color="primary">mdi-gas-station</v-icon>
-                        <span>40 MPG</span>
-                      </v-col>
-                    </v-row>
-
-                    <v-card-actions>
-                      <v-btn color="primary" block rounded small>
-                        book SUV</v-btn
-                      >
-                    </v-card-actions>
-                  </div>
-                </v-card-text>
-              </v-card>
-            </v-col> -->
 
           <v-sheet min-width="650">
             <v-slide-group multiple show-arrows>
               <v-slide-item v-for="(car, i) in cars" :key="i">
-                <v-card outlined class="mt-3 mx-2 py-10 px-4" max-width="270">
+                <v-card outlined class="mt-3 mx-2 py-10 px-4" max-width="280">
                   <v-card-title class="wrap">
-                    {{ car.model }} {{ car.brand }}
+                    {{ car.model }} - {{ car.brand }}
                   </v-card-title>
 
                   <v-card-text>
@@ -80,6 +43,7 @@
                         </v-row>
                       </template>
                     </v-img>
+
                     <div
                       v-else
                       class="px-auto"
@@ -90,6 +54,7 @@
                         mdi-image-off-outline
                       </v-icon>
                     </div>
+
                     <div class="my-4">
                       <v-row>
                         <v-col
@@ -99,8 +64,9 @@
                           class="d-flex flex-column"
                         >
                           <v-icon color="primary">mdi-account-group</v-icon>
-                          <div>5 seats</div>
+                          <div>{{ car.seats }} seats</div>
                         </v-col>
+
                         <v-col
                           cols="12"
                           md="4"
@@ -108,8 +74,9 @@
                           class="d-flex flex-column"
                         >
                           <v-icon color="primary">mdi-car-convertible</v-icon>
-                          <span>AWD</span>
+                          <span>{{ car.transmission }}</span>
                         </v-col>
+
                         <v-col
                           cols="12"
                           md="4"
@@ -117,7 +84,7 @@
                           class="d-flex flex-column"
                         >
                           <v-icon color="primary">mdi-gas-station</v-icon>
-                          <span>40 MPG</span>
+                          <span>{{ car.fuel_type }}</span>
                         </v-col>
                       </v-row>
                     </div>
@@ -140,7 +107,6 @@
               </v-slide-item>
             </v-slide-group>
           </v-sheet>
-          <!-- </div> -->
         </v-col>
       </v-row>
     </v-card-text>

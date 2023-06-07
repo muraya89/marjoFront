@@ -18,15 +18,9 @@
 </template>
 
 <script>
-// import { HalfCircleSpinner as spinner } from "epic-spinners";
 export default {
   name: "Spinner",
-  components: {
-    // spinner,
-  },
-  mounted() {
-    console.log(this.$store.getters["Dashboard/loading"]);
-  },
+  components: {},
 };
 </script>
 

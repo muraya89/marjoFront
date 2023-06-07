@@ -18,7 +18,6 @@ export default {
       }
     },
     SET_LOADING: (state, payload) => {
-      console.log(payload);
       state.loading = payload;
     },
     SET_ACTIONS: (state, payload) => {
