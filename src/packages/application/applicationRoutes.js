@@ -26,7 +26,7 @@ export default [
             meta: { middleware: [Auth] },
           },
           {
-            path: "car-view",
+            path: "car-view/:id",
             name: "CarView",
             components: {
               view: ApplicationDashboard,

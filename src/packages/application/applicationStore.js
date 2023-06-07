@@ -28,5 +28,17 @@ export default {
           Event.$emit("ApiError", error.response);
         });
     },
+    getCar({ commit }, id) {
+      commit("Dashboard/SET_LOADING", true, { root: true });
+      call("get", applicationConstants.car(id))
+        .then((res) => {
+          commit("MUTATE", { state: "car", data: res.data.data });
+          commit("Dashboard/SET_LOADING", false, { root: true });
+        })
+        .catch((error) => {
+          commit("Dashboard/SET_LOADING", false, { root: true });
+          Event.$emit("ApiError", error.response);
+        });
+    },
   },
 };
