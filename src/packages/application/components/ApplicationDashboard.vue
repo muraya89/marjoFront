@@ -10,7 +10,7 @@
           <v-row>
             <v-col cols="12" class="d-flex">
               <v-spacer></v-spacer>
-              <router-link :to="{ name: '' }">show more</router-link>
+              <router-link :to="{ name: 'Cars' }">show more</router-link>
             </v-col>
           </v-row>
 
